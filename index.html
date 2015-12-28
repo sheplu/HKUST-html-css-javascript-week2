@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title> Color guessing game </title>
+    <script>
+      (function game() {
+        var colors = ["blue", "cyan", "gold", "gray", "green", "magenta",
+        "orange", "red", "white", "yellow"];
+        colors.sort();
+        var guessed = false;
+        var played = 0;
+        var rand = Math.floor(Math.random() * (colors.length -1));
+        console.log(rand);
+        do {
+          var value = prompt("I am thinking of one of these colors:\n\
+          "+ colors +"\n\n What color am I thinking of?");
+          played++;
+          if (value == colors[rand]) {
+            guessed = true;
+          } else if(value > colors[rand]){
+            console.log("sup");
+          } else if(value < colors[rand]) {
+            console.log("inf");
+          } else {
+            console.log("not in array");
+          }
+        } while (!guessed);
+
+
+      })();
+    </script>
+  </head>
+
+  <body>
+  </body>
+</html>
