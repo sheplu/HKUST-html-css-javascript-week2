@@ -3,6 +3,21 @@
   <head>
     <title> Color guessing game </title>
     <script>
+      function check_guess(input, colors, rand) {
+        colors = colors;
+        rand = rand;
+        if (input == colors[rand]) {
+          console.log(played);
+          guessed = true;
+        } else if(input > colors[rand]){
+          console.log("sup");
+        } else if(input < colors[rand]) {
+          console.log("inf");
+        } else {
+          console.log("not in array");
+        }
+      }
+
       (function do_game() {
         var colors = ["blue", "cyan", "gold", "gray", "green", "magenta",
         "orange", "red", "white", "yellow"];
@@ -17,10 +32,8 @@
           "+ colors +"\n\n What color am I thinking of?");
           played++;
 
-          if (value == colors[rand]) {
-            console.log(played);
-            guessed = true;
-          }
+          check_guess(value, colors, rand);
+
         } while (!guessed);
 
       })();
