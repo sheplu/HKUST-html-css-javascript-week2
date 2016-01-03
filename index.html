@@ -2,44 +2,70 @@
 <html>
   <head>
     <title> Color guessing game </title>
-    <script>
-      function check_guess(input, colors, rand) {
-        colors = colors;
-        rand = rand;
-        if (input == colors[rand]) {
-          console.log(played);
-          guessed = true;
-        } else if(input > colors[rand]){
-          console.log("sup");
-        } else if(input < colors[rand]) {
-          console.log("inf");
-        } else {
-          console.log("not in array");
-        }
-      }
+  </head>
 
-      (function do_game() {
+  <body id="test">
+      <div>
+          <p> test </p>
+      </div>
+
+      <script>
         var colors = ["blue", "cyan", "gold", "gray", "green", "magenta",
         "orange", "red", "white", "yellow"];
-        colors.sort();
         var guessed = false;
         var played = 0;
         var rand = Math.floor(Math.random() * (colors.length -1));
-        console.log(rand);
 
-        do {
-          var value = prompt("I am thinking of one of these colors:\n\
-          "+ colors +"\n\n What color am I thinking of?");
-          played++;
+        function showLog(tmp) {
+          console.log("showlog " + tmp);
+          alert("showlog " + tmp);
+        }
 
-          check_guess(value, colors, rand);
+        function checkInput(input) {
+          if(isNaN(input) || input < 0 || input > colors.length) {
+            showLog("Not in array");
+            return false
+          }
+          return input;
+        }
 
-        } while (!guessed);
+        function checkGuess(input) {
+          var result = false;
 
-      })();
-    </script>
-  </head>
+          if (input == rand) {
+            console.log(played);
+            result = true;
+          } else if(input > rand){
+            showLog("votre nombre est sup");
+            result = false;
+          } else {
+            showLog("votre nombre est inf");
+            result = false;
+          }
+          return result;
+        }
 
-  <body>
+        function victory() {
+          showLog("Victory! You won");
+          var body = document.getElementsByTagName('body')[0];
+          var test  = document.getElementById('test');
+          console.log(test);
+          body.style.backgroundColor = colors[rand];
+          }
+
+        (function Game() {
+          colors.sort();
+          showLog(colors[rand] + " " + rand);
+
+          do {
+            var input = prompt("I am thinking of one of these colors:\n\
+            "+ colors +"\n\n What color am I thinking of?");
+
+            guessed = checkGuess(checkInput(input));
+            console.log("guessed" + guessed);
+          } while (!guessed);
+          victory();
+        })();
+      </script>
   </body>
 </html>
