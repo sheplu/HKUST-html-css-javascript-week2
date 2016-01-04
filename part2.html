@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title> Color guessing game </title>
+  </head>
+
+  <body>
+      <script>
+        var colors = ["blue", "cyan", "gold", "gray", "green", "magenta",
+        "orange", "red", "white", "yellow"];
+        var guessed = false;
+        var played = 0;
+        var rand = Math.floor(Math.random() * (colors.length -1));
+
+        function showLog(tmp) {
+          console.log("showlog " + tmp);
+          alert("showlog " + tmp);
+        }
+
+        function checkInput(input) {
+          result = input;
+          if(colors.indexOf(input) < 0) {
+            result = false
+          }
+          return result;
+        }
+
+        function checkGuess(input) {
+          var result = false;
+
+          if (input == false) {
+            showLog("I do not recognize that color! Not in array");
+            result = false;
+          } else if(input > colors[rand]){
+            showLog("Your input is alphabetically higher than mine!");
+            result = false;
+          } else if (input < colors[rand]){
+            showLog("Your input is alphabetically lower than mine!");
+            result = false;
+          } else {
+            result = true;
+          }
+          return result;
+        }
+
+        function victory(guesses) {
+          showLog("Victory! You are right! You took " + guesses + " guesses!");
+          var body = document.getElementsByTagName('body')[0];
+          body.style.backgroundColor = colors[rand];
+          }
+
+        (function Game() {
+          colors.sort();
+          showLog(colors[rand]);
+
+          do {
+            var input = prompt("I am thinking of one of these colors:\n\
+            "+ colors +"\n\n What color am I thinking of?");
+            window.played++;
+            guessed = checkGuess(checkInput(input));
+          } while (!guessed);
+          victory(played);
+        })();
+      </script>
+  </body>
+</html>
